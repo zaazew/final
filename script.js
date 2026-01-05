@@ -24,6 +24,7 @@ nameRadio.checked=true;/*diger secim secili ola ola sehife yenilenende name seci
 searchInput.value=""
 inputXBtn.addEventListener("click",()=>{
     searchInput.value=""
+    searchInput.focus()
 })
 searchBtn.addEventListener("click",()=>{
     if(searchInput.value.trim()==""){
@@ -151,10 +152,11 @@ function cardModalOpen(drink){
     cardModalIngredients.innerHTML=""
     for(let i=1;i<=15;i++){
         let ingredient=drink[`strIngredient${i}`]
-        let measure=drink[`strMeasure${i}`] || ""
+        let measure=drink[`strMeasure${i}`] ? drink[`strMeasure${i}`].trim() : "";
+        /*bezi erzaqlar ve olculeri yan yana yox alt alta gelir. hemin olcunun sonunda \r\n var. bu bosluq yaradir*/
         if(ingredient){
             let li=document.createElement("li")
-            li.innerText=`${measure} ${ingredient}`
+            li.innerText=measure ? `${measure} ${ingredient}` : `${ingredient}`
             cardModalIngredients.append(li)
         }
         else{
